@@ -1,0 +1,8 @@
+# Golden dataset for RAG evaluation
+# Format:
+#   - question: "What is the DML estimator?"
+#     expected_answer: "..."   # optional reference answer
+#     relevant_chunks: []      # optional list of expected source IDs
+#     tags: ["conceptual"]     # optional labels for slicing results
+
+questions: []
