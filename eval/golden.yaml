@@ -1,8 +1,524 @@
-# Golden dataset for RAG evaluation
-# Format:
-#   - question: "What is the DML estimator?"
-#     expected_answer: "..."   # optional reference answer
-#     relevant_chunks: []      # optional list of expected source IDs
-#     tags: ["conceptual"]     # optional labels for slicing results
+# ============================================================
+# FACTUAL LOOKUP (18 questions)
+# Single-source, definitional, or "what does X do" questions.
+# Tests basic retrieval on terms that appear in the corpus.
+# ============================================================
 
-questions: []
+- id: q001
+  category: factual_lookup
+  question: "What is double machine learning?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::the_basics_of_doubledebiased_machine_learning::748e2e5b::0
+  - causal_inference_book::frisch_waugh_lovell_on_steroids::ca585df7::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Definitional. Likely failure mode: surfaces references sections."
+
+- id: q002
+  category: factual_lookup
+  question: "What is Neyman orthogonality?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::225_neyman_orthogonal_scores_and_influence_functions::1118ec22::0
+  - chernozhukov_2018_dml::2_construction_of_neyman_orthogonal_scoremoment::d40dd9fb::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Foundational concept from Chernozhukov 2018."
+
+- id: q003
+  category: factual_lookup
+  question: "What is the Frisch-Waugh-Lovell theorem?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::linear_regression_reborn::79d66b03::0
+  - causal_inference_book::frisch_waugh_lovell::7bb8373b::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should hit the book's chapter 22."
+
+- id: q004
+  category: factual_lookup
+  question: "What does the PLR model class in DoubleML estimate?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::implementation_of_the_double_machine_learning_algorithms::f33547ac::0
+  - doubleml_docs::plr_score::7d3f3891::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Library-specific, should hit Bach 2022 or docs."
+
+- id: q005
+  category: factual_lookup
+  question: "What is the difference between DML1 and DML2 algorithms?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::double_machine_learning_algorithms::8e94466b::0
+  - doubleml_docs::algorithm_dml2::ae5d5c66::0
+  - doubleml_docs::algorithm_dml1::1ba841e0::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Specific paper content."
+
+- id: q006
+  category: factual_lookup
+  question: "What is cross-fitting in double machine learning?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::sample_splitting_cross_fitting_and_repeated_cross_fitting::16ae6e60::0
+  - chernozhukov_2018_dml::6_ccddhnr::0964cf39::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Core concept, should appear in multiple sources."
+
+- id: q007
+  category: factual_lookup
+  question: "What is the average treatment effect?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::all_you_need_is_regression::6575d076::0
+  - chernozhukov_2018_dml::0_p::22ff83d0::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Basic causal inference concept, should hit early book chapters."
+
+- id: q008
+  category: factual_lookup
+  question: "What is a propensity score?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::propensity_score::a03fe8b9::0
+  - causal_inference_book::propensity_weighting::ed884381::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should hit book chapter 11."
+
+- id: q009
+  category: factual_lookup
+  question: "What is the IRM model in DoubleML?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::irm_score::8309ea0a::0
+  - doubleml_docs::release_notes::3968ce95::6
+  reference_answer: ""
+  should_abstain: false
+  notes: "Interactive Regression Model — library-specific."
+
+- id: q010
+  category: factual_lookup
+  question: "What does it mean for a treatment effect to be heterogeneous?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::21_meta_learners::cf103fe6::0
+  - doubleml_docs::heterogeneous_treatment_effects::cf74dd64::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should hit book chapter on heterogeneous treatment effects."
+
+- id: q011
+  category: factual_lookup
+  question: "What is regression discontinuity design?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::16_regression_discontinuity_design::9e65ddd1::0
+  - causal_inference_book::rdd_estimation::8d9e2aac::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 16. Tests retrieval on a topic only the book covers."
+
+- id: q012
+  category: factual_lookup
+  question: "What is the local average treatment effect (LATE)?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::52_inference_on_local_average_treatment_effects::809b5270::0
+  - causal_inference_book::local_average_treatment_effect_late::560dc965::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 9."
+
+- id: q013
+  category: factual_lookup
+  question: "What does an instrumental variable do?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::going_around_omitted_variable_bias::206757c1::0
+  - causal_inference_book::key_ideas::b78ffacb::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 8."
+
+- id: q014
+  category: factual_lookup
+  question: "What is doubly robust estimation?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::doubly_robust_estimation::57f38a69::1
+  - causal_inference_book::doubly_robust_estimation::57f38a69::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 12."
+
+- id: q015
+  category: factual_lookup
+  question: "What is synthetic control?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::we_have_time::82e2ab72::0
+  - causal_inference_book::one_amazing_math_trick_to_learn_what_cant_be_known::c821d4a1::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 15."
+
+- id: q016
+  category: factual_lookup
+  question: "What is difference-in-differences?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::did_estimator::82cf0796::1
+  - causal_inference_book::did_estimator::82cf0796::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapters 13 and 24."
+
+- id: q017
+  category: factual_lookup
+  question: "What is meta-learning in causal inference?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::21_meta_learners::cf103fe6::0
+  - causal_inference_book::22_debiasedorthogonal_machine_learning::02c29469::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book chapter 21."
+
+- id: q018
+  category: factual_lookup
+  question: "What is a confounder?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::confounding_bias::2e345c41::0
+  - causal_inference_book::mostly_harmful_controls::d0e47f08::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Basic concept, early book chapters."
+
+
+# ============================================================
+# MULTI-HOP (10 questions)
+# Require combining content from two or more sources.
+# Tests whether retrieval surfaces chunks across sources.
+# ============================================================
+
+- id: q019
+  category: multi_hop
+  question: "How does the book's explanation of orthogonalization relate to the Neyman orthogonality condition in the Chernozhukov
+    paper?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::225_neyman_orthogonal_scores_and_influence_functions::1118ec22::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should pull from book chapter 22 AND Chernozhukov paper."
+
+- id: q020
+  category: multi_hop
+  question: "Compare how the DoubleML library implements PLR with the theoretical PLR setup in the Chernozhukov 2018 paper."
+  ground_truth_chunk_ids:
+  - doubleml_docs::implementation_of_the_double_machine_learning_algorithms::f33547ac::0
+  - doubleml_docs::plr_score::7d3f3891::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Bridge from theory to implementation."
+
+- id: q021
+  category: multi_hop
+  question: "How does the cross-fitting procedure described in the book relate to the K-fold sample splitting in the original
+    DML paper?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::sample_splitting_cross_fitting_and_repeated_cross_fitting::16ae6e60::0
+  - chernozhukov_2018_dml::0_k_0k::48a6455a::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Same idea, different framing across sources."
+
+- id: q022
+  category: multi_hop
+  question: "What is the connection between the FWL theorem and the residual-on-residual regression used in DoubleML?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::frisch_waugh_lovell::7bb8373b::0
+  - causal_inference_book::frisch_waugh_lovell_on_steroids::ca585df7::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Book + paper synthesis."
+
+- id: q023
+  category: multi_hop
+  question: "How do the DoubleML library's IRM model and the book's discussion of doubly robust estimation relate?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::irm_score::8309ea0a::0
+  - causal_inference_book::key_ideas::d514debd::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Cross-source: docs/Bach paper + book chapter 12."
+
+- id: q024
+  category: multi_hop
+  question: "Both the book and the Chernozhukov paper discuss why naive ML approaches to causal inference fail. What overlapping
+    reasons do they give?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::regularization_bias_in_simple_ml_approaches::b2ad0260::0
+  - causal_inference_book::answering_a_different_kind_of_question::b0951a4b::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Synthesis question."
+
+- id: q025
+  category: multi_hop
+  question: "What does it mean for an estimator to be sqrt(n)-consistent, and how does this relate to why DML can use slow-converging
+    ML nuisance estimators?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::11_motivation::efa55186::0
+  - chernozhukov_2018_dml::0_p_0_0_0_0_0::0990ae65::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Theory question that may pull from multiple sections of the paper."
+
+- id: q026
+  category: multi_hop
+  question: "How does the treatment of unconfoundedness in the book compare to the formal identification assumptions in the
+    DML paper?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::51_inference_on_ate_and_atte::41162756::0
+  - causal_inference_book::controlling_what_you_cannot_see::22f85331::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Connects intuitive and formal treatments."
+
+- id: q027
+  category: multi_hop
+  question: "What's the relationship between the propensity score weighting in the book and the IRM model in DoubleML?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::irm_score::8309ea0a::0
+  - doubleml_docs::weighted_average_treatment_effects::ad4c9f4e::0
+  - causal_inference_book::propensity_weighting::ed884381::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Library + book synthesis."
+
+- id: q028
+  category: multi_hop
+  question: "How is the partially linear model defined formally in Chernozhukov 2018, and what assumptions does it require?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::41_inference_in_partially_linear_regression_models::e575e66a::0
+  - doubleml_docs::plr::2730a735::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "May span definition + assumptions sections of the paper."
+
+
+# ============================================================
+# CODE / API SPECIFIC (8 questions)
+# Should hit docs and Bach paper.
+# Tests retrieval on code-heavy and library-specific content.
+# ============================================================
+
+- id: q029
+  category: code_api
+  question: "How do I fit a partially linear regression model using DoubleML in Python?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::implementation_of_the_double_machine_learning_algorithms::f33547ac::0
+  - doubleml_docs::the_causal_model::7fd39e01::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should hit docs and/or Bach 2022."
+
+- id: q030
+  category: code_api
+  question: "What is the DoubleMLData class and what does it do?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::special_data_types::1e611ede::0
+  - doubleml_docs::the_data_backend_doublemldata::296d43b8::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Library-specific."
+
+- id: q031
+  category: code_api
+  question: "How do I specify the learners (ML models) used by DoubleML for nuisance estimation?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::minimum_req::315ecf1f::0
+  - doubleml_docs::set_hyperparams::da480f57::0
+  - doubleml_docs::learners_hyperparameters_and_hyperparameter_tuning::a4c22dfb::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Common how-to question."
+
+- id: q032
+  category: code_api
+  question: "How do I install the DoubleML package?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::python_installing_doubleml::32fe58a4::0
+  - doubleml_docs::installing_doubleml::33b6c7b2::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should hit installation docs."
+
+- id: q033
+  category: code_api
+  question: "What's the difference between using DoubleMLPLR and DoubleMLPLIV?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::plr_score::7d3f3891::0
+  - doubleml_docs::pliv_score::0526c54e::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Library API comparison."
+
+- id: q034
+  category: code_api
+  question: "How do I get confidence intervals for the treatment effect estimate from DoubleML?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::conditional_average_treatment_effects_cates::92600ab6::0
+  - doubleml_docs::group_average_treatment_effects_gates::e3330b5c::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Common usage question."
+
+- id: q035
+  category: code_api
+  question: "Can I use scikit-learn estimators with DoubleML?"
+  ground_truth_chunk_ids:
+  - bach_2022_doubleml_python::6_future_work::150af4ef::0
+  - doubleml_docs::learners_hyperparameters_and_hyperparameter_tuning::a4c22dfb::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Should be answered in docs/Bach paper."
+
+- id: q036
+  category: code_api
+  question: "How does DoubleML handle the cross-fitting splits internally?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::sample_splitting_cross_fitting_and_repeated_cross_fitting::16ae6e60::0
+  - doubleml_docs::cross_fitting_with_k_folds::2c860e0c::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Implementation detail question."
+
+
+# ============================================================
+# ADVERSARIAL / COMMON MISCONCEPTION (7 questions)
+# Phrased to mislead or to elicit a confidently-wrong base-model response.
+# Tests whether retrieval grounds the answer correctly.
+# ============================================================
+
+- id: q037
+  category: adversarial
+  question: "Does double machine learning require the treatment effect to be linear?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::what_is_non_parametric_about::e5f4f655::0
+  - causal_inference_book::what_is_non_parametric_about::e5f4f655::1
+  reference_answer: ""
+  should_abstain: false
+  notes: "The 'partially linear' name suggests yes; the answer is no for IRM-type models."
+
+- id: q038
+  category: adversarial
+  question: "Is DoubleML the same as ensemble machine learning?"
+  ground_truth_chunk_ids:
+  - bach_2022_doubleml_python::6_future_work::150af4ef::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "The name 'double' is misleading."
+
+- id: q039
+  category: adversarial
+  question: "If I have unobserved confounders, can I still use DoubleML to recover the causal effect?"
+  ground_truth_chunk_ids:
+  - chernozhukov_2018_dml::51_inference_on_ate_and_atte::41162756::0
+  - causal_inference_book::key_ideas::1b1760ed::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Common misconception. Answer is no."
+
+- id: q040
+  category: adversarial
+  question: "Does using more flexible ML models in DoubleML always give better causal estimates?"
+  ground_truth_chunk_ids:
+  - causal_inference_book::more_econometrics_may_be_needed::0f0b4324::0
+  - causal_inference_book::non_parametric_doubledebiased_ml::9ee7181a::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "Overfitting concern from the book directly addresses this."
+
+- id: q041
+  category: adversarial
+  question: "Can I use the same data to fit the nuisance models and to estimate the treatment effect?"
+  ground_truth_chunk_ids:
+  - doubleml_docs::sample_splitting_to_remove_bias_induced_by_overfitting::69c085fa::0
+  - chernozhukov_2018_dml::61_the_effect_of_unemployment_insurance_bonus_on_unemploymen::e1be0fd4::0
+  reference_answer: ""
+  should_abstain: false
+  notes: "No — that's exactly what cross-fitting prevents."
+
+- id: q042
+  category: adversarial
+  question: "Does the DoubleML R package have the same model classes as the Python package?"
+  ground_truth_chunk_ids:
+  - bach_2022_doubleml_python::5_comparison_to_related_software::344a9edc::0
+  - doubleml_docs::release_notes::3968ce95::6
+  reference_answer: ""
+  should_abstain: false
+  notes: "Tests whether retrieval handles a question about R when only Python is in the corpus."
+
+- id: q043
+  category: should_abstain
+  question: "Is regression always the best way to estimate causal effects?"
+  ground_truth_chunk_ids: []
+  reference_answer: ""
+  should_abstain: true
+  notes: "Book covers when regression fails and alternative methods. Reclassified during labeling — no single chunk in top-10
+    directly addresses the comparative framing."
+
+
+# ============================================================
+# SHOULD-ABSTAIN (7 questions)
+# The answer is not in the corpus.
+# Tests whether the system honestly declines vs. hallucinating.
+# ============================================================
+
+- id: q044
+  category: should_abstain
+  question: "What's the optimal learning rate for fine-tuning Llama-3 on a custom dataset?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Off-topic, not in corpus."
+  should_abstain: true
+  notes: "Far-miss: completely unrelated topic."
+
+- id: q045
+  category: should_abstain
+  question: "How do I implement DoubleML for survival analysis with right-censored data?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Survival extensions not covered in this corpus."
+  should_abstain: true
+  notes: "Near-miss: DML extensions exist but not in your snapshot."
+
+- id: q046
+  category: should_abstain
+  question: "What were the breaking changes introduced in DoubleML Python version 0.10.0?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Version-specific changelog not in corpus."
+  should_abstain: true
+  notes: "Plausible question, no answer in your data."
+
+- id: q047
+  category: should_abstain
+  question: "How does DoubleML compare to EconML for estimating treatment effects?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] EconML comparison not in corpus."
+  should_abstain: true
+  notes: "Near-miss: another causal ML library, not covered."
+
+- id: q048
+  category: should_abstain
+  question: "What's the best vector database for production RAG systems?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Off-topic."
+  should_abstain: true
+  notes: "Far-miss: completely unrelated."
+
+- id: q049
+  category: should_abstain
+  question: "Does DoubleML support GPU acceleration for the nuisance learners?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Hardware/performance details not in corpus."
+  should_abstain: true
+  notes: "Near-miss: plausible question, your docs likely don't cover it."
+
+- id: q050
+  category: should_abstain
+  question: "What's the recommended sample size to use DoubleML reliably?"
+  ground_truth_chunk_ids: []
+  reference_answer: "[ABSTAIN] Specific sample size guidance not in corpus."
+  should_abstain: true
+  notes: "Near-miss: theory addresses asymptotics, but no concrete recommendation."
