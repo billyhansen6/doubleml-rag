@@ -1,12 +1,20 @@
 # doubleml-rag
 
-A RAG (Retrieval-Augmented Generation) demo over DoubleML documentation, built with the Anthropic Claude API and Voyage AI embeddings — no LangChain or LlamaIndex.
+A RAG (Retrieval-Augmented Generation) demo over DoubleML documentation, built with the Anthropic Claude API and Voyage AI embeddings. No LangChain or LlamaIndex.
 
 ---
 
 ## Overview
 
-This project implements a from-scratch RAG pipeline for answering questions about DoubleML (Double Machine Learning). It ingests documentation, papers, and book chapters; embeds and indexes them with ChromaDB; and retrieves relevant context for Claude to generate answers.
+This project implements a from-scratch RAG pipeline for answering questions about DoubleML (Double Machine Learning). It ingests documentation, papers, and book chapters, embeds and indexes them with ChromaDB, and retrieves relevant context for Claude to generate cited answers.
+
+The goal was to simulate the kind of RAG setup a business might use over its internal documents — pointing an LLM at a specific corpus to answer context-specific questions. DoubleML isn't a perfect analogue, since Claude has already seen the public docs and papers in training, but the architecture and the failure modes should be similar. The eval is built to surface those failure modes rather than just produce a working demo.
+
+---
+
+## Eval results
+
+The full evaluation is documented in [`notebooks/eval_results.ipynb`](notebooks/eval_results.ipynb). It covers retrieval metrics (Recall@k, MRR), generation quality, faithfulness, and abstention behavior across 50 hand-labeled questions — including a RAG vs no-RAG ablation.
 
 ---
 
