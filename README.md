@@ -14,7 +14,7 @@ The goal was to simulate the kind of RAG setup a business might use over its int
 
 ## Eval results
 
-The full evaluation is documented in [`notebooks/eval_results.ipynb`](notebooks/eval_results.ipynb). It covers retrieval metrics (Recall@k, MRR), generation quality, faithfulness, and abstention behavior across 50 hand-labeled questions — including a RAG vs no-RAG ablation.
+The full evaluation is documented in [`notebooks/eval_results.ipynb`](notebooks/eval_results.ipynb). It covers retrieval metrics (Recall@k, MRR), generation quality, faithfulness, and abstention behavior across 50 labeled questions — including a RAG vs no-RAG ablation.
 
 ---
 
